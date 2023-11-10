@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<p id="es6"></p>
+<p id="1"></p>
+<p id="2"></p>
+<p id="3"></p>
+<a id="4"></a>
+<a id="5"></a>
+        <script>
+            //arrow function
+            const x = (x,y) => x*y;
+            document.getElementById ("es6").innerHTML = x(4,2);
+
+            //with curly braces
+            const myFunc = name =>{
+                return `Hi ${name}`;
+            }
+            console.log(myFunc('GErald'))
+
+            //w/o curly braces
+            const myFunc1 = name => `Hi ${name}`;
+            console.log(myFunc('Reyes'))
+
+            //template literals
+            const myFunc2 = (name,age)=>{
+                return `Hi ${name}, Your age is ${age} years old!`;
+            }
+            console.log(myFunc2('Ulquiorra',10))
+          
+            //Object destruction
+            const contact={
+                name:'Jennifer',
+                familyName: 'Reyes',
+                age: 33
+            }
+            let {name,familyName,age}=contact
+            console.log(name)
+            console.log(familyName)
+            console.log(age)
+
+            //Array destruction
+            const Arr=['black','gray','white'];
+            let [get1,get2,get3]=Arr;
+            document.getElementById ("1").innerHTML = (get1);
+            document.getElementById ("2").innerHTML = (get2);
+            document.getElementById ("3").innerHTML = (get3);
+
+
+            //promises
+            const myPromise=() =>{
+                return new Promise((resolve,reject)=>{
+                    resolve('You made your promise!')
+                })
+            }
+            console.log(myPromise())
+
+            //rest parameter and spread operator
+            const arr=['Gerald','Jennifer',10,'Ulquiorra','How are you?'];
+            const [val1,val2,val3,...rest]=arr;
+            const Func=(restOfArr)=>{
+                return restOfArr.filter(item=>{return item}).join(' ');
+            }
+            console.log(Func(rest))
+
+            //spread operator
+            const arr1=['Gerald','Jennifer',10,'Ulquiorra','How are you?'];
+            const Func1=(...anArray)=>{
+                return anArray;
+            }
+            console.log(Func(arr));
+
+            //classes
+            class myClass{
+                constructor(name,age1){
+                    this.name=name;
+                    this.age1=age1;
+                }
+                sayHello(){
+                console.log(`Hi ${this.name} your age is ${this.age1}`);
+                }
+            }
+            const user = new myClass('Kuku',22);
+            console.log(user.name)
+            console.log(user.age1)
+
+            //inherit classes
+            class userProfile extends myClass{
+                username(){
+                    console.log(this.name)
+                }
+            }
+            const profile = new userProfile('Awit',30);
+            profile.sayHello()
+            profile.username()
+    </script>
+    </body>
+</html>
